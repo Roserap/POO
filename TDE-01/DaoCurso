@@ -1,0 +1,20 @@
+package model.dao;
+
+import java.util.ArrayList;
+import model.Curso;
+
+public class DaoCurso {
+    private static ArrayList<Curso> listaCursos;
+
+    static {
+        DaoCurso.listaCursos = new ArrayList<>();
+    }
+
+    public boolean adicionar(Curso novo) {
+        return DaoCurso.listaCursos.add(novo);
+    }
+
+    public ArrayList<Curso> obterTodos() {
+        return new ArrayList<>(DaoCurso.listaCursos);
+    }
+}
