@@ -1,0 +1,37 @@
+package viewer;
+
+import javax.swing.JOptionPane;
+import model.*;
+import model.dao.*;
+
+public class JanelaPrincipal {
+
+    public JanelaPrincipal() {
+        try {
+            // Criando alguns cursos
+            Curso c1 = new Curso(1, "Ciência da Computação");
+            Curso c2 = new Curso(2, "Engenharia Civil");
+
+            DaoCurso daoC = new DaoCurso();
+            daoC.adicionar(c1);
+            daoC.adicionar(c2);
+
+            // Criando alunos
+            Aluno a1 = new Aluno(100, "Maria Silva", c1);
+            Aluno a2 = new Aluno(101, "João Souza", c2);
+
+            DaoAluno daoA = new DaoAluno();
+            daoA.adicionar(a1);
+            daoA.adicionar(a2);
+
+            // Exibindo
+            JOptionPane.showMessageDialog(null, 
+                "Cursos cadastrados:\n" + daoC.obterTodos() +
+                "\n\nAlunos cadastrados:\n" + daoA.obterTodos()
+            );
+
+        } catch (ModelException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+        }
+    }
+}
