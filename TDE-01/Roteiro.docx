@@ -1,0 +1,88 @@
+Diagrama classe, relacionamento (criado no draw-io)
+Usei pesquisa para esta criação em: https://medium.com/@sadaf.cuagain/configuring-and-running-plantuml-with-vs-code-8f2f6e64bb8d
+
+ 
+
+Diagrama UML - (Usando o site on-line https://www.plantuml.com)
+Estrutura de Pastas
+src/
+ ├── controller/
+ │    └── CtrlPrograma.java
+ ├── model/
+ │    ├── Curso.java
+ │    ├── Aluno.java
+ │    └── ModelException.java
+ ├── model/dao/
+ │    ├── DaoCurso.java
+ │    └── DaoAluno.java
+ └── viewer/
+      └── JanelaPrincipal.java
+Diagrama UML
+@startuml
+class Curso {
+  - int codigo
+  - String nome
+  - ArrayList<Aluno> listaAlunos
+  --
+  + Curso(int codigo, String nome)
+  + getCodigo() : int
+  + setCodigo(int codigo)
+  + getNome() : String
+  + setNome(String nome)
+  + getListaAlunos() : ArrayList<Aluno>
+  + adicionarAluno(Aluno) : boolean
+  + removerAluno(Aluno) : boolean
+}
+
+class Aluno {
+  - int matricula
+  - String nome
+  - Curso curso
+  --
+  + Aluno(int matricula, String nome, Curso curso)
+  + getMatricula() : int
+  + setMatricula(int matricula)
+  + getNome() : String
+  + setNome(String nome)
+  + getCurso() : Curso
+  + setCurso(Curso curso)
+}
+
+class ModelException {
+  + ModelException(String msg)
+}
+
+class DaoCurso {
+  - static ArrayList<Curso> listaCursos
+  --
+  + adicionar(Curso) : boolean
+  + obterTodos() : ArrayList<Curso>
+}
+
+class DaoAluno {
+  - static ArrayList<Aluno> listaAlunos
+  --
+  + adicionar(Aluno) : boolean
+  + obterTodos() : ArrayList<Aluno>
+}
+
+class CtrlPrograma {
+  + main(String[] args)
+}
+
+class JanelaPrincipal {
+  + JanelaPrincipal()
+}
+
+' RELACIONAMENTOS
+Curso "1" o-- "*" Aluno : contém >
+Aluno "1" --> "1" Curso : está matriculado em >
+CtrlPrograma --> JanelaPrincipal
+JanelaPrincipal --> Curso
+JanelaPrincipal --> Aluno
+DaoCurso --> Curso
+DaoAluno --> Aluno
+@enduml
+ 
+
+OBS: Não vou negar que usei IA para correção de erros que cometi ao criar os arquivos (que foram muitos), mas caminhando no aprendizado.
